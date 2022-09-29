@@ -25,6 +25,7 @@ button.place(relx=0.5, rely=0.85, anchor=tkinter.CENTER)
 
 def button_Exit():
     print("button Exit")
+    quit()
 button = customtkinter.CTkButton(master=app,width=220, text="Exit",corner_radius=3, command=button_Exit)
 button.place(relx=0.5, rely=0.9, anchor=tkinter.CENTER)
 
