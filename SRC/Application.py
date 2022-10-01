@@ -14,6 +14,19 @@ root = ct.CTk()  # create CTk window like you do with the Tk window
 def change_to_newgame():
     btn_frame.place_forget() 
     playBtnSound()
+    btn_frames = tk.Frame(root,bg="#222325") 
+    NumberOne_Btn = ct.CTkButton(btn_frames, text = "1",corner_radius=3, command=change_to_newgame).grid(row = 0, column = 1, pady=3)
+    NumberTwp_Btn = ct.CTkButton(btn_frames, text = "2",corner_radius=3, command=change_to_newgame).grid(row = 0, column = 1, pady=3)
+    NumberThree_Btn = ct.CTkButton(btn_frames, text = "3",corner_radius=3, command=change_to_newgame).grid(row = 0, column = 1, pady=3)
+    NumberFour_Btn = ct.CTkButton(btn_frames, text = "4",corner_radius=3, command=change_to_newgame).grid(row = 0, column = 1, pady=3)
+    NumberFive_Btn = ct.CTkButton(btn_frames, text = "5",corner_radius=3, command=change_to_newgame).grid(row = 0, column = 1, pady=3)
+    NumberSix_Btn = ct.CTkButton(btn_frames, text = "6",corner_radius=3, command=change_to_newgame).grid(row = 0, column = 1, pady=3)
+    NumberSeven_Btn = ct.CTkButton(btn_frames, text = "7",corner_radius=3, command=change_to_newgame).grid(row = 0, column = 1, pady=3)
+    NumberEight_Btn = ct.CTkButton(btn_frames, text = "8",corner_radius=3, command=change_to_newgame).grid(row = 0, column = 1, pady=3)
+    NumberNine_Btn = ct.CTkButton(btn_frames, text = "9",corner_radius=3, command=change_to_newgame).grid(row = 0, column = 1, pady=3)
+    NumberZero_Btn = ct.CTkButton(btn_frames, text = "0",corner_radius=3, command=change_to_newgame).grid(row = 0, column = 1, pady=3)
+    btn_frames.place(relx = 0.45, rely=0.75)
+
 # Dimension, Icon and Title
 root.title("GamesName")
 root.iconbitmap(r'SRC\Application\STTEST.ico')
