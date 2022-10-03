@@ -1,4 +1,5 @@
 import tkinter as tk
+from turtle import width
 import customtkinter as ct
 import pygame
 from pygame.locals import *
@@ -52,14 +53,15 @@ def Exit_Game():
     exit()
 
 
-# Buttons 
-btn_frame = tk.Frame(root,bg="#222325") 
-Newgame_btn = ct.CTkButton(btn_frame, text = "New Game",corner_radius=3,text_font=('Excluded',15), command=change_to_newgame).grid(row = 0, column = 1, pady=3)
-Continue_btn = ct.CTkButton(btn_frame, text = "Continue",corner_radius=3,text_font=('Excluded',15)).grid(row = 1, column = 1, pady=3)
-Repository_btn = ct.CTkButton(btn_frame, text = "Repository",corner_radius=3,text_font=('Excluded',15)).grid(row = 2, column = 1, pady=3)
-exit_btn = ct.CTkButton(btn_frame, text = "Exit",corner_radius=3,command = Exit_Game,text_font=('Excluded',15)).grid(row = 3, column = 1, pady=3)
-btn_frame.place(relx = 0.45, rely=0.75)
-    
+# First Page
+btn_frame = tk.Frame(root,bg="#222325", width = 200) 
+Newgame_btn = ct.CTkButton(btn_frame, text = "New Game",corner_radius=3,width=300,height= 40,text_font=('Excluded',15), hover=True, command=change_to_newgame).grid(row = 0, column = 1, pady=3)
+Repository_btn = ct.CTkButton(btn_frame, text = "Repository",corner_radius=3,width=300,height= 40,text_font=('Excluded',15)).grid(row = 2, column = 1, pady=3)
+Settings_btn = ct.CTkButton(btn_frame, text = "Settings",corner_radius=3,width=300,height= 40,text_font=('Excluded',15)).grid(row = 1, column = 1, pady=3)
+exit_btn = ct.CTkButton(btn_frame, text = "Exit",corner_radius=3,width=300,height= 40,command = Exit_Game,text_font=('Excluded',15)).grid(row = 3, column = 1, pady=3)
+btn_frame.place(relx = 0.44, rely=0.70)
+Title_1 = ct.CTkLabel(master = root, text="Welcome to", width = 300, height= 150, text_font = ('Excluded, 30')).place(rely = 0.32 , relx = 0.48, anchor = tk.CENTER)
+Title_2 = tk.Label(root, text="My game", width = 7, height= 5,fg = "Yellow", bg ="#212325" ,font = ('Excluded, 30')).place(rely = 0.32 , relx = 0.63, anchor = tk.CENTER)   
 # Copyright
 copyright = tk.StringVar(value="Game made by Parsa dehghani & Shayan Hosseinzadeh")
 label = ct.CTkLabel(master=root,
