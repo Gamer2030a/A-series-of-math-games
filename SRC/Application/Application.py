@@ -8,10 +8,32 @@ import webbrowser
 import pyglet
 import GameMode
 
+IsMusicMuted = False
+
 #============== Mute Music Player =============== 
-def MuteBGMusic():
-    Mute_btn.config(image = Sound_off_img)
-    mixer.music.stop()       
+def MuteBGMusic(event):
+    event.widget.config(image = Sound_off_img)
+    mixer.music.set_volume(0)
+    IsMusicMuted = True
+#==================================================
+def UnmuteBGMusic(event):
+    event.widget.config(image = Sound_on_img)
+    mixer.music.set_volume(1)
+    IsMusicMuted = False
+#=====================================================
+def switchMusic(event):
+    global IsMusicMuted
+     
+    # Determine is on or off
+    if IsMusicMuted:
+        print("Muted the music")
+        UnmuteBGMusic(event)
+        IsMusicMuted = False
+    else:
+        print("UNMuted the music")
+        MuteBGMusic(event)
+        IsMusicMuted = True
+#=====================================================
 #============== Repository Button =============== 
 def OpenRepository():
     webbrowser.open('https://github.com/Gamer2030a/A-series-of-math-games.git', new=2)
@@ -71,12 +93,17 @@ Title_1 = ct.CTkLabel(master = root, text="Welcome to", width = 300, height= 150
 Title_1.place(rely = 0.32 , relx = 0.45, anchor = tk.CENTER)
 Title_2 = tk.Label(root, text="My game", width = 7, height= 5,fg = "Yellow", bg ="#212325" ,font = ('Excluded, 30'))
 Title_2.place(rely = 0.32 , relx = 0.61, anchor = tk.CENTER)   
-# Sound on
-Sound_on_img = tk.PhotoImage(file = r'SRC\Assets\Icons\unmute.png',master =root) # Size should be 64*64
-# Sound Off
+#===================Mute & Unmute Button Configuration=============
+Sound_on_img = tk.PhotoImage(file = r'SRC/Assets/Icons/unmute.png',master =root) # Size should be 64*64
 Sound_off_img = tk.PhotoImage(file =r'SRC/Assets/Icons/mute.png',master =root)
-Mute_btn = tk.Button(root, image=(Sound_on_img), text = "", height=64, width=64, bg="#212325",borderwidth=0,command = MuteBGMusic) # Size should be 64*64
-Mute_btn.place(anchor = tk.NW)
+Mute_btn_frame = tk.Frame(root,bg="#212325",width=68,height=64)
+Mute_btn_frame.place(anchor = tk.NW)
+mute_btn_label = tk.Label(Mute_btn_frame, image=(Sound_on_img),bg = "#212325")
+mute_btn_label.bind("<Button-1>",switchMusic)
+#mute_btn_label.bind("<Button-3>",UnmuteBGMusic)
+mute_btn_label.place(anchor = tk.NW)
+#=================================================================
+
 #=============Copy Right============
 copyright = tk.StringVar(value="Game made by Parsa dehghani & Shayan Hosseinzadeh")
 label = ct.CTkLabel(master=root,
