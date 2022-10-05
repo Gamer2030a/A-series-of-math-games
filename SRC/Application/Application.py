@@ -1,8 +1,10 @@
 import tkinter as tk
+from urllib.request import urlopen
 import customtkinter as ct
 import pygame
 from pygame.locals import *
 from pygame import mixer
+import webbrowser
 import pyglet
 import GameMode
 
@@ -10,6 +12,10 @@ import GameMode
 def MuteBGMusic():
     Mute_btn.config(image = Sound_off_img)
     mixer.music.stop()       
+#============== Repository Button =============== 
+def OpenRepository():
+    webbrowser.open('https://github.com/Gamer2030a/A-series-of-math-games.git', new=2)
+
 #================================================
 
 #============== Style of root =============== 
@@ -56,7 +62,7 @@ pyglet.font.add_file(r'SRC\Assets\Fonts\Excluded.ttf')
 #Buttons
 btn_frame = tk.Frame(root,bg="#222325", width = 200) 
 Newgame_btn = ct.CTkButton(btn_frame, text = "New Game",corner_radius=3,width=300,height= 40,text_font=('Excluded',15), hover=True, command=change_to_newgame).grid(row = 0, column = 1, pady=3)
-Repository_btn = ct.CTkButton(btn_frame, text = "Repository",corner_radius=3,width=300,height= 40,text_font=('Excluded',15)).grid(row = 2, column = 1, pady=3)
+Repository_btn = ct.CTkButton(btn_frame, text = "Repository",corner_radius=3,width=300,height= 40,text_font=('Excluded',15),command = OpenRepository).grid(row = 2, column = 1, pady=3)
 Settings_btn = ct.CTkButton(btn_frame, text = "Settings",corner_radius=3,width=300,height= 40,text_font=('Excluded',15)).grid(row = 1, column = 1, pady=3)
 exit_btn = ct.CTkButton(btn_frame, text = "Exit",corner_radius=3,width=300,height= 40,command = GameMode.Exit_Game,text_font=('Excluded',15)).grid(row = 3, column = 1, pady=3)
 btn_frame.place(relx = 0.5, rely=0.85, anchor =tk.CENTER)
