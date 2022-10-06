@@ -25,11 +25,11 @@ def switchMusic(event):
      
     # Determine is on or off
     if IsMusicMuted:
-        print("Muted the music")
+        print("Unmuted the music")
         UnmuteBGMusic(event)
         IsMusicMuted = False
     else:
-        print("UNMuted the music")
+        print("Muted the music")
         MuteBGMusic(event)
         IsMusicMuted = True
 #=====================================================
@@ -73,6 +73,15 @@ def change_to_newgame():
     btn_frames.place(relx = 0.5, rely=0.85,anchor="center")
 #====================================================================
 
+
+#========================Settings Button =============================
+def change_to_settings():
+    btn_frame.place_forget() 
+    Title_1.place_forget()
+    Title_2.place_forget()
+    setting_title = ct.CTkLabel(root, text = "Settings", text_font=('Excluded',30),corner_radius=3)
+    setting_title.place(rely = 0.3, relx = 0.5,anchor = tk.CENTER)
+
 # Dimension, Icon and Title
 root.title("GamesName")
 root.iconbitmap(r'SRC\Application\STTEST.ico')
@@ -84,7 +93,7 @@ pyglet.font.add_file(r'SRC\Assets\Fonts\Excluded.ttf')
 btn_frame = tk.Frame(root,bg="#222325", width = 200) 
 Newgame_btn = ct.CTkButton(btn_frame, text = "New Game",corner_radius=3,width=300,height= 40,text_font=('Excluded',15), hover=True, command=change_to_newgame).grid(row = 0, column = 1, pady=3)
 Repository_btn = ct.CTkButton(btn_frame, text = "Repository",corner_radius=3,width=300,height= 40,text_font=('Excluded',15),command = OpenRepository).grid(row = 2, column = 1, pady=3)
-Settings_btn = ct.CTkButton(btn_frame, text = "Settings",corner_radius=3,width=300,height= 40,text_font=('Excluded',15)).grid(row = 1, column = 1, pady=3)
+Settings_btn = ct.CTkButton(btn_frame, text = "Settings",corner_radius=3,width=300,height= 40,text_font=('Excluded',15),command = change_to_settings).grid(row = 1, column = 1, pady=3)
 exit_btn = ct.CTkButton(btn_frame, text = "Exit",corner_radius=3,width=300,height= 40,command = GameMode.Exit_Game,text_font=('Excluded',15)).grid(row = 3, column = 1, pady=3)
 btn_frame.place(relx = 0.5, rely=0.85, anchor =tk.CENTER)
 #Title
@@ -99,7 +108,6 @@ Mute_btn_frame = tk.Frame(root,bg="#212325",width=68,height=64)
 Mute_btn_frame.place(anchor = tk.NW)
 mute_btn_label = tk.Label(Mute_btn_frame, image=(Sound_on_img),bg = "#212325")
 mute_btn_label.bind("<Button-1>",switchMusic)
-#mute_btn_label.bind("<Button-3>",UnmuteBGMusic)
 mute_btn_label.place(anchor = tk.NW)
 #=================================================================
 
