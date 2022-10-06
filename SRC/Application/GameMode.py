@@ -30,8 +30,26 @@ def Add(NumberOne,NumberTwo):
     return "what is " , str(NumberOne) , " + " , str(NumberTwo) , " ?"
 
 def Random(NumberOne,NumberTwo):
-    #had a return 
-    random.choice([Multiply(NumberOne,NumberTwo),Divide(NumberOne,NumberTwo),Subtract(NumberOne,NumberTwo),Add(NumberOne,NumberTwo)])
+    
+    GameModes = ["Multiply", "Divide", "Subtract" , "Add"]
+    print(random.choice(GameModes))
+    CurrentMode = GameModes
+    def GameModeSelect(CurrentMode):
+        if CurrentMode == "Multiply":
+            return Multiply(NumberOne,NumberTwo)
+        elif CurrentMode == "Divide":
+            return Divide(NumberOne,NumberTwo)
+        elif CurrentMode == "Subtract":
+            return Subtract(NumberOne,NumberTwo)
+        else:
+            return Add(NumberOne,NumberTwo)
+    return GameModeSelect(CurrentMode)
+    
+    """
+    random_int = random.randint(0,3)
+    list_of_math = [Multiply,Divide,Add,Subtract]
+    random.choice(list_of_math[random_int](NumberOne,NumberTwo))
+    """
 #============== Difficulty  ===============
 EasyRange = [0,20]
 MediumRange = [0,100]
@@ -60,7 +78,7 @@ def GiveQuestion():
         NumberTwo = random.randint(0,250)
         print(NumberOne)
         print(NumberTwo)
-        Random(NumberOne,NumberTwo)
+        return Random(NumberOne,NumberTwo)
 
     else:
         print("Nightmare Question")

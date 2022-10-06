@@ -3,15 +3,16 @@ from turtle import width
 import customtkinter as ct
 import pygame
 from pygame.locals import *
-from pygame import mixer
+from pygame import mixer 
 import webbrowser
 import pyglet
 import GameMode
+from GameMode import GiveQuestion
 from PIL import ImageTk, Image
 
 IsMusicMuted = False
 
-  
+
 #============== Mute Music Player =============== 
 def MuteBGMusic(event):
     event.widget.config(image = Sound_off_img)
@@ -60,7 +61,9 @@ def change_to_newgame():
     Title_1.place_forget()
     Title_2.place_forget()
     Label_frame = tk.Frame(root)
-    Screen_label = ct.CTkLabel(Label_frame,bg_color="#1d1d1d",width=2020,height=220,text="what is 2*2?",text_color="#FFD700",text_font=('Arial',20)).grid(row = 0, column = 0)
+    NewText = GiveQuestion() #to generate the question
+    strippedText = str(NewText).replace('(','').replace(')','').replace(',','').replace("'",'')
+    Screen_label = ct.CTkLabel(Label_frame,bg_color="#1d1d1d",width=2020,height=220,text=strippedText,text_color="#FFD700",text_font=('Arial',20)).grid(row = 0, column = 0)
     btn_frames = tk.Frame(root,bg="#222325") 
     NumberOne_Btn = ct.CTkButton(btn_frames, text = "1",text_font=('Excluded',20),corner_radius=3, command=change_to_newgame).grid(row = 0, column = 1,padx = 3, pady=3)
     NumberTwo_Btn = ct.CTkButton(btn_frames, text = "2",text_font=('Excluded',20),corner_radius=3, command=change_to_newgame).grid(row = 0, column = 2,padx = 3, pady=3)
