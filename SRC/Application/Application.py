@@ -1,4 +1,5 @@
 import tkinter as tk
+from turtle import width
 import customtkinter as ct
 import pygame
 from pygame.locals import *
@@ -6,9 +7,11 @@ from pygame import mixer
 import webbrowser
 import pyglet
 import GameMode
+from PIL import ImageTk, Image
 
 IsMusicMuted = False
 
+  
 #============== Mute Music Player =============== 
 def MuteBGMusic(event):
     event.widget.config(image = Sound_off_img)
@@ -79,9 +82,17 @@ def change_to_settings():
     btn_frame.place_forget() 
     Title_1.place_forget()
     Title_2.place_forget()
+    mute_btn_label.place(relx = 0.5, rely = 0.6 ,anchor = tk.CENTER)
     setting_title = ct.CTkLabel(root, text = "Settings", text_font=('Excluded',30),corner_radius=3)
     setting_title.place(rely = 0.3, relx = 0.5,anchor = tk.CENTER)
-
+    ###############
+    def setvolume():
+        global volume_slider
+        value = volume_slider.cget()
+        mixer.music.set_volume(value)  
+    volume_slider = tk.Scale(master = root, from_=0, to=100, command=setvolume(), border_color="#206AA5", button_color="White",button_hover_color="black")
+    volume_slider.place(relx = 0.5, rely = 0.7, anchor =tk.CENTER)
+    #========Buttons =========== 
 # Dimension, Icon and Title
 root.title("GamesName")
 root.iconbitmap(r'SRC\Application\STTEST.ico')
@@ -98,17 +109,16 @@ exit_btn = ct.CTkButton(btn_frame, text = "Exit",corner_radius=3,width=300,heigh
 btn_frame.place(relx = 0.5, rely=0.85, anchor =tk.CENTER)
 #Title
 Title_1 = ct.CTkLabel(master = root, text="Welcome to", width = 300, height= 150, text_font = ('Excluded, 30'))
-Title_1.place(rely = 0.32 , relx = 0.45, anchor = tk.CENTER)
+Title_1.place(rely = 0.32 , relx = 0.43, anchor = tk.CENTER)
 Title_2 = tk.Label(root, text="My game", width = 7, height= 5,fg = "Yellow", bg ="#212325" ,font = ('Excluded, 30'))
-Title_2.place(rely = 0.32 , relx = 0.61, anchor = tk.CENTER)   
+Title_2.place(rely = 0.32 , relx = 0.59, anchor = tk.CENTER)   
 #===================Mute & Unmute Button Configuration=============
 Sound_on_img = tk.PhotoImage(file = r'SRC/Assets/Icons/unmute.png',master =root) # Size should be 64*64
 Sound_off_img = tk.PhotoImage(file =r'SRC/Assets/Icons/mute.png',master =root)
-Mute_btn_frame = tk.Frame(root,bg="#212325",width=68,height=64)
-Mute_btn_frame.place(anchor = tk.NW)
-mute_btn_label = tk.Label(Mute_btn_frame, image=(Sound_on_img),bg = "#212325")
+Mute_btn_frame = tk.Frame(root,bg="#212325",width=68,height=100)
+Mute_btn_frame.place(relx = 0.5, rely = 0.6,anchor = tk.CENTER)
+mute_btn_label = tk.Label(Mute_btn_frame, image=(Sound_on_img),bg = "#212325",)
 mute_btn_label.bind("<Button-1>",switchMusic)
-mute_btn_label.place(anchor = tk.NW)
 #=================================================================
 
 #=============Copy Right============
