@@ -1,5 +1,4 @@
 import tkinter as tk
-from urllib.request import urlopen
 import customtkinter as ct
 import pygame
 from pygame.locals import *
