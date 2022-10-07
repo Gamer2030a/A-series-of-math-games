@@ -7,7 +7,7 @@ from pygame import mixer
 import webbrowser
 import pyglet
 import GameMode
-from PIL import ImageTk, Image
+from GameMode import ChangeDifficulty
 
 #============difficulty_radio ============
 
@@ -15,6 +15,7 @@ def radiobutton_event():
     global diff_level
     print("Diffculty changed, current mode: ", difficulty_radio.get())
     diff_level = difficulty_radio.get()
+    ChangeDifficulty(diff_level)
 IsMusicMuted = False
 #============== Mute Music Player =============== 
 def MuteBGMusic(event):
@@ -147,6 +148,7 @@ Sound_off_img = tk.PhotoImage(file =r'SRC/Assets/Icons/mute.png',master =root)
 Mute_btn_frame = tk.Frame(root,bg="#212325",width=68,height=100)
 Mute_btn_frame.place(anchor = tk.NW)
 mute_btn_label = tk.Label(Mute_btn_frame, image=(Sound_on_img),bg = "#212325",)
+mute_btn_label.bind("<Button-1>",switchMusic)
 mute_btn_label.place(anchor = tk.NW)
 #=================================================================
 

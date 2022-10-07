@@ -33,8 +33,7 @@ def Add(NumberOne,NumberTwo):
 def Random(NumberOne,NumberTwo):
     
     GameModes = ["Multiply", "Divide", "Subtract" , "Add"]
-    print(random.choice(GameModes))
-    CurrentMode = GameModes
+    CurrentMode = random.choice(GameModes) 
     def GameModeSelect(CurrentMode):
         if CurrentMode == "Multiply":
             return Multiply(NumberOne,NumberTwo)
@@ -45,8 +44,8 @@ def Random(NumberOne,NumberTwo):
         else:
             return Add(NumberOne,NumberTwo)
     return GameModeSelect(CurrentMode)
+
     
- 
 #============== Difficulty  ===============
 EasyRange = [0,20]
 MediumRange = [0,100]
@@ -63,11 +62,19 @@ def GiveQuestion():
     
     if GameDifficulty == 0:
         print("Easy Question")
-        return random.randint(0,250) , random.randint(0,250)
+        NumberOne =  random.randint(0,50)
+        NumberTwo = random.randint(0,50)
+        print(NumberOne)
+        print(NumberTwo)
+        return Random(NumberOne,NumberTwo)
 
     elif GameDifficulty == 1:
         print("Medium Question")
-        return random.randint(0,250) , random.randint(0,250)
+        NumberOne =  random.randint(0,100)
+        NumberTwo = random.randint(0,100)
+        print(NumberOne)
+        print(NumberTwo)
+        return Random(NumberOne,NumberTwo)
 
     elif GameDifficulty == 2:
         print("Hard Question")
@@ -79,7 +86,15 @@ def GiveQuestion():
 
     else:
         print("Nightmare Question")
-        return random.randint(0,250) , random.randint(0,250)
+        NumberOne =  random.randint(0,450)
+        NumberTwo = random.randint(0,450)
+        print(NumberOne)
+        print(NumberTwo)
+        return Random(NumberOne,NumberTwo)
+
+def ChangeDifficulty(NewGameDifficulty):
+    GameDifficulty = NewGameDifficulty
+    print("Current game difficulty is " , str(GameDifficulty))
 #===========================================
 
      
