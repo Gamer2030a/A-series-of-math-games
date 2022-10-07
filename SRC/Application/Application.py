@@ -1,4 +1,6 @@
+from asyncio.windows_events import NULL
 import tkinter as tk
+from tkinter.ttk import Button, Widget
 from turtle import width
 import customtkinter as ct
 import pygame
@@ -96,7 +98,7 @@ def change_to_settings():
     setting_title.place(rely = 0.54, relx = 0.5,anchor = tk.CENTER)
     setting_mainframe = ct.CTkFrame(master = root, height= 250, width= 400,fg_color="#222325", border_color="#206AA5", border_width=3)
     setting_mainframe.place(rely = 0.77, relx = 0.5,anchor =tk.CENTER)
-    Mute_btn_label1 = ct.CTkButton(setting_mainframe, text = "Mute Music",width=140,height=50, text_font=('Excluded',14),hover_color="red",fg_color="green",command = switchMusic)
+    Mute_btn_label1 = ct.CTkButton(setting_mainframe, text = "Mute Music",width=140,height=50, text_font=('Excluded',14),hover_color="red",fg_color="green",command =switchMusic)
     Mute_btn_label1.place(anchor=tk.CENTER, relx = 0.5, rely = 0.17)
     Mute_sfx_btn = ct.CTkButton(setting_mainframe, text = "Mute SFX",width=148,height=50, text_font=('Excluded',14),hover_color="red",fg_color="green")
     Mute_sfx_btn .place(anchor=tk.CENTER, relx = 0.5, rely = 0.41)

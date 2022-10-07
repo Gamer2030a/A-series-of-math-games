@@ -1,9 +1,10 @@
-import random,time
+import random,time,datetime
 import tkinter as tk
 import customtkinter as ct
 import pygame
 from pygame.locals import *
 from pygame import mixer
+
 
 
 #==============Music Player ===============
@@ -95,12 +96,29 @@ def GiveQuestion():
 def ChangeDifficulty(NewGameDifficulty):
     GameDifficulty = NewGameDifficulty
     print("Current game difficulty is " , str(GameDifficulty))
-#===========================================
+#==============  GameTimer   ===============
+def GameTimer(Minutes, Seconds):
+    TotalTimeLeft = Minutes * 60 + Seconds
+    while TotalTimeLeft > 0:
+        timer = datetime.timedelta(seconds = TotalTimeLeft)
+        time.sleep(1)
+        TotalTimeLeft -= 1
+        return TotalTimeLeft # we will return it for the timer to display it at the top of the page 
+    print("Total Time Left is 0")
+    GameOver
+#==============   GameOver   ===============
+def GameOver():
+    #we will calculate total points and move to a new page for the score
+    print("Game Over")
 
+#===========================================
      
-   
-def SavePlayeroints():
-    print("points")
+global CurrentPlayerPoints
+CurrentPlayerPoints = 0
+
+def SavePlayeroints(PlayerAwardedPoints):
+    CurrentPlayerPoints = CurrentPlayerPoints + PlayerAwardedPoints
+    print("Current Player points are: " , str(CurrentPlayerPoints))
     
     
 #exit game
