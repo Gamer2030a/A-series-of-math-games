@@ -7,15 +7,19 @@ from pygame import mixer
 import webbrowser
 import pyglet
 import GameMode
-from GameMode import GiveQuestion
 from PIL import ImageTk, Image
 
+#============difficulty_radio ============
+
+def radiobutton_event():
+    global diff_level
+    print("Diffculty changed, current mode: ", difficulty_radio.get())
+    diff_level = difficulty_radio.get()
 IsMusicMuted = False
-
-
 #============== Mute Music Player =============== 
 def MuteBGMusic(event):
     event.widget.config(image = Sound_off_img)
+    event.widget.config(text="Unmute")
     mixer.music.set_volume(0)
     IsMusicMuted = True
 #==================================================
@@ -51,7 +55,7 @@ ct.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
 # Windows 
 root = ct.CTk()  # create CTk window like you do with the Tk window
 root.resizable(width=False, height=False) 
-
+difficulty_radio = tk.IntVar()   
 # active music
 GameMode.PlayBGMusic()
 
@@ -61,7 +65,7 @@ def change_to_newgame():
     Title_1.place_forget()
     Title_2.place_forget()
     Label_frame = tk.Frame(root)
-    NewText = GiveQuestion() #to generate the question
+    NewText = GameMode.GiveQuestion() #to generate the question
     strippedText = str(NewText).replace('(','').replace(')','').replace(',','').replace("'",'')
     Screen_label = ct.CTkLabel(Label_frame,bg_color="#1d1d1d",width=2020,height=220,text=strippedText,text_color="#FFD700",text_font=('Arial',20)).grid(row = 0, column = 0)
     btn_frames = tk.Frame(root,bg="#222325") 
@@ -85,17 +89,39 @@ def change_to_settings():
     btn_frame.place_forget() 
     Title_1.place_forget()
     Title_2.place_forget()
-    mute_btn_label.place(relx = 0.5, rely = 0.6 ,anchor = tk.CENTER)
+    Mute_btn_frame.place_forget()
+    mute_btn_label.place_forget()
     setting_title = ct.CTkLabel(root, text = "Settings", text_font=('Excluded',30),corner_radius=3)
-    setting_title.place(rely = 0.3, relx = 0.5,anchor = tk.CENTER)
-    ###############
-    def setvolume():
-        global volume_slider
-        value = volume_slider.cget()
-        mixer.music.set_volume(value)  
-    volume_slider = tk.Scale(master = root, from_=0, to=100, command=setvolume(), border_color="#206AA5", button_color="White",button_hover_color="black")
-    volume_slider.place(relx = 0.5, rely = 0.7, anchor =tk.CENTER)
-    #========Buttons =========== 
+    setting_title.place(rely = 0.54, relx = 0.5,anchor = tk.CENTER)
+    setting_mainframe = ct.CTkFrame(master = root, height= 250, width= 400,fg_color="#222325", border_color="#206AA5", border_width=3)
+    setting_mainframe.place(rely = 0.77, relx = 0.5,anchor =tk.CENTER)
+    Mute_btn_label1 = ct.CTkButton(setting_mainframe, text = "Mute Music",width=140,height=50, text_font=('Excluded',14),hover_color="red",fg_color="green",command = switchMusic)
+    Mute_btn_label1.place(anchor=tk.CENTER, relx = 0.5, rely = 0.17)
+    Mute_sfx_btn = ct.CTkButton(setting_mainframe, text = "Mute SFX",width=148,height=50, text_font=('Excluded',14),hover_color="red",fg_color="green")
+    Mute_sfx_btn .place(anchor=tk.CENTER, relx = 0.5, rely = 0.41)
+    vol_title = ct.CTkLabel(setting_mainframe, text = "Volume", text_font = ('Excluded',13))
+    vol_title.place(anchor=tk.CENTER, relx = 0.5, rely = 0.59)
+    vol_slider = ct.CTkSlider(setting_mainframe, from_=0.0, to= 1.0)
+    current_vol = vol_slider.get()
+    vol_slider.place(anchor=tk.CENTER, relx = 0.5, rely = 0.67)
+    #====================Difficulty Levels =====================
+    Difficulty_title = ct.CTkLabel(setting_mainframe, text = "Difficulty", text_font = ('Excluded',14))
+    Difficulty_title.place(anchor=tk.CENTER, relx = 0.5, rely = 0.78)
+    Easy_difficulty_chck = ct.CTkRadioButton(setting_mainframe, text = "Easy", hover=True, command = radiobutton_event, variable=difficulty_radio, value=0)
+    Easy_difficulty_chck.place(anchor=tk.CENTER, relx = 0.2, rely = 0.89)
+    Normal_difficulty_chck = ct.CTkRadioButton(setting_mainframe, text = "Normal", hover=True,command = radiobutton_event, variable=difficulty_radio, value=1)
+    Normal_difficulty_chck.place(anchor=tk.CENTER, relx = 0.4, rely = 0.89)
+    Hard_difficulty_chck = ct.CTkRadioButton(setting_mainframe, text = "Hard", hover=True,command = radiobutton_event, variable=difficulty_radio, value=2)
+    Hard_difficulty_chck.place(anchor=tk.CENTER, relx = 0.6, rely = 0.89)
+    Nightmare_difficulty_chck = ct.CTkRadioButton(setting_mainframe, text = "Nightmare", hover=True,command = radiobutton_event, variable=difficulty_radio, value=3)
+    Nightmare_difficulty_chck.place(anchor=tk.CENTER, relx = 0.8, rely = 0.89)
+    
+    
+    
+    
+  
+    
+#=========================================================
 # Dimension, Icon and Title
 root.title("GamesName")
 root.iconbitmap(r'SRC\Application\STTEST.ico')
@@ -119,11 +145,14 @@ Title_2.place(rely = 0.32 , relx = 0.59, anchor = tk.CENTER)
 Sound_on_img = tk.PhotoImage(file = r'SRC/Assets/Icons/unmute.png',master =root) # Size should be 64*64
 Sound_off_img = tk.PhotoImage(file =r'SRC/Assets/Icons/mute.png',master =root)
 Mute_btn_frame = tk.Frame(root,bg="#212325",width=68,height=100)
-Mute_btn_frame.place(relx = 0.5, rely = 0.6,anchor = tk.CENTER)
+Mute_btn_frame.place(anchor = tk.NW)
 mute_btn_label = tk.Label(Mute_btn_frame, image=(Sound_on_img),bg = "#212325",)
-mute_btn_label.bind("<Button-1>",switchMusic)
+mute_btn_label.place(anchor = tk.NW)
 #=================================================================
 
+    
+    
+    
 #=============Copy Right============
 copyright = tk.StringVar(value="Game made by Parsa dehghani & Shayan Hosseinzadeh")
 label = ct.CTkLabel(master=root,

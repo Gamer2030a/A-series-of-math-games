@@ -5,6 +5,7 @@ import pygame
 from pygame.locals import *
 from pygame import mixer
 
+
 #==============Music Player ===============
 def PlayBGMusic():
     mixer.init()
@@ -45,11 +46,7 @@ def Random(NumberOne,NumberTwo):
             return Add(NumberOne,NumberTwo)
     return GameModeSelect(CurrentMode)
     
-    """
-    random_int = random.randint(0,3)
-    list_of_math = [Multiply,Divide,Add,Subtract]
-    random.choice(list_of_math[random_int](NumberOne,NumberTwo))
-    """
+ 
 #============== Difficulty  ===============
 EasyRange = [0,20]
 MediumRange = [0,100]

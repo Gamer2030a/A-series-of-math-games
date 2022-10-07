@@ -1,19 +1,17 @@
-import tkinter as tk
+import tkinter 
+import customtkinter 
 
-root = tk.Tk()
-canvas = tk.Canvas(root)
-canvas.pack()
+root_tk = tkinter.Tk()
+radio_var = tkinter.IntVar()
 
-canvas_text = canvas.create_text(10, 10, text='', anchor=tk.NW)
+def radiobutton_event():
+    print("radiobutton toggled, current value:", radio_var.get())
 
-test_string = "This is a test"
-#Time delay between chars, in milliseconds
-delta = 500 
-delay = 0
-for i in range(len(test_string) + 1):
-    s = test_string[:i]
-    update_text = lambda s=s: canvas.itemconfigure(canvas_text, text=s)
-    canvas.after(delay, update_text)
-    delay += delta
+radiobutton_1 = customtkinter.CTkRadioButton(master=root_tk, text="CTkRadioButton 1",
+                                             command=radiobutton_event, variable= radio_var, value=1)
+radiobutton_2 = customtkinter.CTkRadioButton(master=root_tk, text="CTkRadioButton 2",
+                                             command=radiobutton_event, variable= radio_var, value=2)
 
-root.mainloop()
+radiobutton_1.pack(padx=20, pady=10)
+radiobutton_2.pack(padx=20, pady=10)
+root_tk.mainloop()
