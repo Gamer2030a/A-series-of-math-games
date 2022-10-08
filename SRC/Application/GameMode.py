@@ -10,6 +10,7 @@ from pygame import mixer
 #==============Music Player ===============
 def PlayBGMusic():
     mixer.init()
+    mixer.music.set_volume(0.5)
     mixer.music.load(r'SRC\Assets\SFX\bgmusic.mp3')
     mixer.music.play()
 #==============  GameModes  ===============
@@ -48,10 +49,10 @@ def Random(NumberOne,NumberTwo):
 
     
 #============== Difficulty  ===============
-EasyRange = [0,20]
-MediumRange = [0,100]
-HardRange = [0,250]
-NightmareRange = [0,2500]
+EasyRange = [1,20]
+MediumRange = [1,100]
+HardRange = [1,250]
+NightmareRange = [1,2500]
 # 0 = easy
 # 1 = medium
 # 2 = hard
@@ -63,32 +64,32 @@ def GiveQuestion():
     
     if GameDifficulty == 0:
         print("Easy Question")
-        NumberOne =  random.randint(0,50)
-        NumberTwo = random.randint(0,50)
+        NumberOne =  random.randint(1,50)
+        NumberTwo = random.randint(1,50)
         print(NumberOne)
         print(NumberTwo)
         return Random(NumberOne,NumberTwo)
 
     elif GameDifficulty == 1:
         print("Medium Question")
-        NumberOne =  random.randint(0,100)
-        NumberTwo = random.randint(0,100)
+        NumberOne =  random.randint(1,100)
+        NumberTwo = random.randint(1,100)
         print(NumberOne)
         print(NumberTwo)
         return Random(NumberOne,NumberTwo)
 
     elif GameDifficulty == 2:
         print("Hard Question")
-        NumberOne =  random.randint(0,250)
-        NumberTwo = random.randint(0,250)
+        NumberOne =  random.randint(1,250)
+        NumberTwo = random.randint(1,250)
         print(NumberOne)
         print(NumberTwo)
         return Random(NumberOne,NumberTwo)
 
     else:
         print("Nightmare Question")
-        NumberOne =  random.randint(0,450)
-        NumberTwo = random.randint(0,450)
+        NumberOne =  random.randint(1,450)
+        NumberTwo = random.randint(1,450)
         print(NumberOne)
         print(NumberTwo)
         return Random(NumberOne,NumberTwo)
