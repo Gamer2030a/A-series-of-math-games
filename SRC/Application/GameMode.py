@@ -60,7 +60,7 @@ NightmareRange = [1,2500]
 
 def GiveQuestion():
     global GameDifficulty
-    GameDifficulty = 2
+    GameDifficulty = 0
     
     if GameDifficulty == 0:
         print("Easy Question")
@@ -97,21 +97,27 @@ def GiveQuestion():
 def ChangeDifficulty(NewGameDifficulty):
     GameDifficulty = NewGameDifficulty
     print("Current game difficulty is " , str(GameDifficulty))
-#==============  GameTimer   ===============
-def GameTimer(Minutes, Seconds):
-    TotalTimeLeft = Minutes * 60 + Seconds
-    while TotalTimeLeft > 0:
-        timer = datetime.timedelta(seconds = TotalTimeLeft)
-        time.sleep(1)
-        TotalTimeLeft -= 1
-        return TotalTimeLeft # we will return it for the timer to display it at the top of the page 
-    print("Total Time Left is 0")
-    GameOver
+    
 #==============   GameOver   ===============
 def GameOver():
     #we will calculate total points and move to a new page for the score
     print("Game Over")
+    #this is a function that shows a page with the score
+#==============  Calculate   ===============
 
+#==============  GameTimer   ===============
+
+def GameTimer(Minutes, Seconds):
+    TotalTimeLeft = Minutes * 60 + Seconds
+    print(TotalTimeLeft)
+    while TotalTimeLeft > 0:
+        timer = datetime.timedelta(seconds = TotalTimeLeft)
+        time.sleep(1)
+        TotalTimeLeft -= 1
+        print(TotalTimeLeft)
+       # return TotalTimeLeft # we will return it for the timer to display it at the top of the page 
+    print("Total Time Left is 0")
+    GameOver()
 #===========================================
      
 global CurrentPlayerPoints

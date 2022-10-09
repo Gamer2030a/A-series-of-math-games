@@ -1,4 +1,5 @@
 from asyncio.windows_events import NULL
+import datetime
 import tkinter as tk
 from tkinter.ttk import Button, Widget
 from turtle import width
@@ -9,7 +10,10 @@ from pygame import mixer
 import webbrowser
 import pyglet
 import GameMode
-from GameMode import ChangeDifficulty
+from GameMode import ChangeDifficulty , GameTimer
+import threading 
+import time 
+#from SRC.Application.GameMode import GameTimer
 
 #============difficulty_radio ============
 
@@ -96,8 +100,6 @@ def BackButton_NewGame(self):
     Title_2.place(rely = 0.32 , relx = 0.59, anchor = tk.CENTER)
     btn_frame.lift()
     btn_frame.place(relx = 0.5, rely=0.85, anchor =tk.CENTER)
-    
-    
 
 #================= New Game Button =================================
 def change_to_newgame():
@@ -150,8 +152,11 @@ def change_to_newgame():
     Back_Icon.place(anchor = tk.NW)
     btn_frames.place(relx = 0.5, rely=0.85,anchor="center")
 
-#====================================================================
 
+#=================  New Game Thread  =================================  
+def NewgameState():
+    GameThread = threading.Thread(target = change_to_newgame).start()
+    TimerThread = threading.Thread(target = GameTimer,args=(0,10)).start()
 
 #========================Settings Button =============================
 def change_to_settings():
@@ -203,7 +208,7 @@ pyglet.font.add_file(r'SRC\Assets\Fonts\Excluded.ttf')
 #==============================First Page==============================
 #Buttons
 btn_frame = tk.Frame(root,bg="#222325", width = 200) 
-Newgame_btn = ct.CTkButton(btn_frame, text = "New Game",corner_radius=3,width=300,height= 40,text_font=('Excluded',15), hover=True, command=change_to_newgame)
+Newgame_btn = ct.CTkButton(btn_frame, text = "New Game",corner_radius=3,width=300,height= 40,text_font=('Excluded',15), hover=True, command=NewgameState)
 Newgame_btn.grid(row = 0, column = 1, pady=3)
 Repository_btn = ct.CTkButton(btn_frame, text = "Repository",corner_radius=3,width=300,height= 40,text_font=('Excluded',15),command = OpenRepository)
 Repository_btn.grid(row = 2, column = 1, pady=3)
