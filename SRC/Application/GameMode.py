@@ -11,26 +11,33 @@ from pygame import mixer
 def PlayBGMusic():
     mixer.init()
     mixer.music.set_volume(0.5)
-    mixer.music.load(r'SRC\Assets\SFX\bgmusic.mp3')
+    mixer.music.load(r'SRC/Assets/SFX/bgmusic.mp3')
     mixer.music.play()
 #==============  GameModes  ===============
 
-def Multiply(NumberOne,NumberTwo):
-    print("what is " , str(NumberOne) , " X " , str(NumberTwo) , " ?")
-    print (NumberOne*NumberTwo)
-    return "what is " , str(NumberOne) , " X " , str(NumberTwo) , " ?"
+def Multiply(NumberOne,NumberTwo): 
+    print("what is " , str(NumberOne) , " X " , str(NumberTwo) , " =")
+    x = (NumberOne*NumberTwo)
+    print(x)
+    return "what is " , str(NumberOne) , " X " , str(NumberTwo) , " ="
 
 def Divide(NumberOne,NumberTwo):
-    print("what is " , str(NumberOne) , " / " , str(NumberTwo) , " ?")
-    return "what is " , str(NumberOne) , " / " , str(NumberTwo) , " ?"
+    print("what is " , str(NumberOne) , " / " , str(NumberTwo) , " =")
+    x = (NumberOne/NumberTwo)
+    print(x)
+    return "what is " , str(NumberOne) , " / " , str(NumberTwo) , " ="
 
 def Subtract(NumberOne,NumberTwo):
-    print("what is " , str(NumberOne) , " - " , str(NumberTwo) , " ?")
-    return "what is " , str(NumberOne) , " - " , str(NumberTwo) , " ?"
+    print("what is " , str(NumberOne) , " - " , str(NumberTwo) , " =")
+    x = (NumberOne-NumberTwo)
+    print(x)
+    return "what is " , str(NumberOne) , " - " , str(NumberTwo) , " ="
         
 def Add(NumberOne,NumberTwo):
-    print("what is " , str(NumberOne) , " + " , str(NumberTwo) , " ?")
-    return "what is " , str(NumberOne) , " + " , str(NumberTwo) , " ?"
+    print("what is " , str(NumberOne) , " + " , str(NumberTwo) , " =")
+    x = (NumberOne-NumberTwo)
+    print(x)
+    return "what is " , str(NumberOne) , " + " , str(NumberTwo) , " ="
 
 def Random(NumberOne,NumberTwo):
     
@@ -97,7 +104,7 @@ def GiveQuestion():
 def ChangeDifficulty(NewGameDifficulty):
     GameDifficulty = NewGameDifficulty
     print("Current game difficulty is " , str(GameDifficulty))
-    
+
 #==============   GameOver   ===============
 def GameOver():
     #we will calculate total points and move to a new page for the score
@@ -120,7 +127,7 @@ def GameTimer(Minutes, Seconds):
     GameOver()
 #===========================================
      
-global CurrentPlayerPoints
+# global CurrentPlayerPoints
 CurrentPlayerPoints = 0
 
 def SavePlayeroints(PlayerAwardedPoints):

@@ -1,17 +1,19 @@
-import tkinter 
+import tkinter  
 import customtkinter 
 
-root_tk = tkinter.Tk()
-radio_var = tkinter.IntVar()
+def on_change(e):
+    print (e.widget.get())
+    showlabel.config(text = e.widget.get())
 
-def radiobutton_event():
-    print("radiobutton toggled, current value:", radio_var.get())
+root = tkinter.Tk()
 
-radiobutton_1 = customtkinter.CTkRadioButton(master=root_tk, text="CTkRadioButton 1",
-                                             command=radiobutton_event, variable= radio_var, value=1)
-radiobutton_2 = customtkinter.CTkRadioButton(master=root_tk, text="CTkRadioButton 2",
-                                             command=radiobutton_event, variable= radio_var, value=2)
+entry = customtkinter.CTkEntry(master=root,
+                               placeholder_text="CTkEntry",
+                               width=120,
+                               height=25,
+                               border_width=2,
+                               corner_radius=10)
+entry.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
 
-radiobutton_1.pack(padx=20, pady=10)
-radiobutton_2.pack(padx=20, pady=10)
-root_tk.mainloop()
+
+root.mainloop()

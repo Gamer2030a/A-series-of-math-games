@@ -1,8 +1,5 @@
-from asyncio.windows_events import NULL
 import datetime
 import tkinter as tk
-from tkinter.ttk import Button, Widget
-from turtle import width
 import customtkinter as ct
 import pygame
 from pygame.locals import *
@@ -10,11 +7,19 @@ from pygame import mixer
 import webbrowser
 import pyglet
 import GameMode
-from GameMode import ChangeDifficulty , GameTimer
+from GameMode import ChangeDifficulty, GameTimer
 import threading 
 import time 
 #from SRC.Application.GameMode import GameTimer
 
+def on_click_add(text):
+    userinput_lbl.insert(tk.END,text)
+def on_click_del():
+    userinput_lbl.delete(userinput_lbl.index("end")-1)
+def on_click_get(num):
+    global User_answer
+    User_answer = num 
+    return User_answer
 #============difficulty_radio ============
 
 def radiobutton_event():
@@ -84,6 +89,7 @@ def BackButton_NewGame(self):
     Mute_btn_frame.place(anchor = tk.NW)
     mute_btn_label.place(anchor = tk.NW)
     Back_Icon.place_forget()
+    userinput_lbl.place_forget()
     Screen_label.grid_forget()
     Label_frame.config(bg="#212325")
     NumberOne_Btn.grid_forget()
@@ -96,6 +102,7 @@ def BackButton_NewGame(self):
     NumberEight_Btn.grid_forget()
     NumberNine_Btn.grid_forget()
     NumberZero_Btn.grid_forget()
+    userinput_lbl.delete(0,tk.END)
     Title_1.place(rely = 0.32 , relx = 0.43, anchor = tk.CENTER)
     Title_2.place(rely = 0.32 , relx = 0.59, anchor = tk.CENTER)
     btn_frame.lift()
@@ -103,6 +110,7 @@ def BackButton_NewGame(self):
 
 #================= New Game Button =================================
 def change_to_newgame():
+    global userinput_lbl
     global NumberOne_Btn
     global NumberTwo_Btn
     global NumberThree_Btn
@@ -115,6 +123,7 @@ def change_to_newgame():
     global NumberZero_Btn
     global Screen_label
     global Label_frame
+    
     Back_Icon.bind("<Button-1>",BackButton_NewGame)
     btn_frame.place_forget() 
     Title_1.place_forget()
@@ -122,41 +131,48 @@ def change_to_newgame():
     Label_frame = tk.Frame(root)
     NewText = GameMode.GiveQuestion() #to generate the question
     strippedText = str(NewText).replace('(','').replace(')','').replace(',','').replace("'",'')
-    Screen_label = ct.CTkLabel(Label_frame,bg_color="#1d1d1d",width=2020,height=220,text=strippedText,text_color="#FFD700",text_font=('Arial',20))
+    Screen_label = ct.CTkLabel(Label_frame,bg_color="#1d1d1d",width=2020,height=220,text=strippedText,text_color="#FFD700",text_font=('Tajawal-Medium',20))
     Screen_label.grid(row = 0, column = 0)
     btn_frames = tk.Frame(root,bg="#222325") 
-    NumberOne_Btn = ct.CTkButton(btn_frames, text = "1",text_font=('Excluded',20),corner_radius=3, command=change_to_newgame)
+    NumberOne_Btn = ct.CTkButton(btn_frames, text = "1",text_font=('Excluded',20),corner_radius=3, command = lambda:on_click_add(1))
     NumberOne_Btn.grid(row = 0, column = 1,padx = 3, pady=3)
-    NumberTwo_Btn = ct.CTkButton(btn_frames, text = "2",text_font=('Excluded',20),corner_radius=3, command=change_to_newgame)
+    NumberTwo_Btn = ct.CTkButton(btn_frames, text = "2",text_font=('Excluded',20),corner_radius=3,command = lambda:on_click_add(2))
     NumberTwo_Btn.grid(row = 0, column = 2,padx = 3, pady=3)
-    NumberThree_Btn = ct.CTkButton(btn_frames, text = "3",text_font=('Excluded',20),corner_radius=3, command=change_to_newgame)
+    NumberThree_Btn = ct.CTkButton(btn_frames, text = "3",text_font=('Excluded',20),corner_radius=3,command = lambda:on_click_add(3))
     NumberThree_Btn.grid(row = 0, column = 3,padx = 3, pady=3)
-    NumberFour_Btn = ct.CTkButton(btn_frames, text = "4",text_font=('Excluded',20),corner_radius=3, command=change_to_newgame)
+    NumberFour_Btn = ct.CTkButton(btn_frames, text = "4",text_font=('Excluded',20),corner_radius=3,command = lambda:on_click_add(4))
     NumberFour_Btn.grid(row = 1, column = 1,padx = 3, pady=3)
-    NumberFive_Btn = ct.CTkButton(btn_frames, text = "5",text_font=('Excluded',20),corner_radius=3, command=change_to_newgame)
+    NumberFive_Btn = ct.CTkButton(btn_frames, text = "5",text_font=('Excluded',20),corner_radius=3,command = lambda:on_click_add(5))
     NumberFive_Btn.grid(row = 1, column = 2,padx = 3, pady=3)
-    NumberSix_Btn = ct.CTkButton(btn_frames, text = "6",text_font=('Excluded',20),corner_radius=3, command=change_to_newgame)
+    NumberSix_Btn = ct.CTkButton(btn_frames, text = "6",text_font=('Excluded',20),corner_radius=3,command = lambda:on_click_add(6))
     NumberSix_Btn.grid(row = 1, column = 3,padx = 3, pady=3)
-    NumberSeven_Btn = ct.CTkButton(btn_frames, text = "7",text_font=('Excluded',20),corner_radius=3, command=change_to_newgame)
+    NumberSeven_Btn = ct.CTkButton(btn_frames, text = "7",text_font=('Excluded',20),corner_radius=3,command = lambda:on_click_add(7))
     NumberSeven_Btn.grid(row = 2, column = 1,padx = 3, pady=3)
-    NumberEight_Btn = ct.CTkButton(btn_frames, text = "8",text_font=('Excluded',20),corner_radius=3, command=change_to_newgame)
+    NumberEight_Btn = ct.CTkButton(btn_frames, text = "8",text_font=('Excluded',20),corner_radius=3,command = lambda:on_click_add(8))
     NumberEight_Btn.grid(row = 2, column = 2,padx = 3, pady=3)
-    NumberNine_Btn = ct.CTkButton(btn_frames, text = "9",text_font=('Excluded',20),corner_radius=3, command=change_to_newgame)
+    NumberNine_Btn = ct.CTkButton(btn_frames, text = "9",text_font=('Excluded',20),corner_radius=3,command = lambda:on_click_add(9))
     NumberNine_Btn.grid(row = 2, column = 3,padx = 3, pady=3)
-    NumberZero_Btn = ct.CTkButton(btn_frames, text = "0",text_font=('Excluded',20),corner_radius=3, command=change_to_newgame)
+    NumberZero_Btn = ct.CTkButton(btn_frames, text = "0",text_font=('Excluded',20),corner_radius=3,command = lambda:on_click_add(0))
     NumberZero_Btn.grid(row = 3, column = 2,padx = 3, pady=3)
+    Submit_Btn = ct.CTkButton(btn_frames, text = "ENTER",text_font=('Excluded',18),corner_radius=3, command = lambda:on_click_get(userinput_lbl.get()))
+    Submit_Btn.grid(row = 3, column = 3,padx = 3, pady=3)
+    Delete_btn = ct.CTkButton(btn_frames, text = "C",text_font=('Excluded',20),corner_radius=3,command=on_click_del)
+    Delete_btn.grid(row = 3, column = 1,padx = 3, pady=3)
     Back_Icon.config(bg = "#1d1d1d")
     Back_Icon.pack(anchor = tk.NW)
     Back_Icon.lift()
     Label_frame.place(relx = 0.5, rely=0.14,anchor="center")
     Back_Icon.place(anchor = tk.NW)
     btn_frames.place(relx = 0.5, rely=0.85,anchor="center")
+    userinput_lbl = tk.Entry(root,text = "?",bg = "#1d1d1d", font =('Tajawal-Medium',20), fg ="#FFD700", borderwidth=0)
+    userinput_lbl.place(relx = 0.70, rely = 0.14,anchor = tk.CENTER)
+    
 
 
 #=================  New Game Thread  =================================  
 def NewgameState():
     GameThread = threading.Thread(target = change_to_newgame).start()
-    TimerThread = threading.Thread(target = GameTimer,args=(0,10)).start()
+    # TimerThread = threading.Thread(target = GameTimer,args=(0,10)).start()
 
 #========================Settings Button =============================
 def change_to_settings():
@@ -204,6 +220,7 @@ root.title("GamesName")
 root.iconbitmap(r'SRC\Application\STTEST.ico')
 root.geometry("1280x720")
 pyglet.font.add_file(r'SRC\Assets\Fonts\Excluded.ttf')
+pyglet.font.add_file(r'SRC\Assets\Fonts\Tajawal-Medium.ttf')
 
 #==============================First Page==============================
 #Buttons
